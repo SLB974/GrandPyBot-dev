@@ -1,0 +1,35 @@
+#user_question {
+    position: relative;
+    display: flex;
+    align-items: center;
+    top: 4%;
+    left: 10%;
+    height: 7%;
+    width: 80%;
+    min-width: 240px;
+    z-index: 2;
+    background-color: transparent;
+}
+
+#message {
+    display: flex;
+    align-content: space-between;
+}
+
+#user_query,
+#submit {
+    font-family: "Quicksand", cursive;
+    border-radius: 20px;
+    border: 2px solid #17205a;
+    padding: 0.5%;
+    opacity: 0.8;
+}
+
+#user_query {
+    width: 80%;
+}
+
+#submit {
+    width: 18%;
+    font-weight: bold;
+}

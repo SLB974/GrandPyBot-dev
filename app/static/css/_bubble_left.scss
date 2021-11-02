@@ -1,0 +1,44 @@
+.dialogue_left {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    align-content: center;
+    width: 100%;
+}
+
+.dialogue_left>.avatar {
+    content: url("../pics/grandpy.png");
+    max-width: 60px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+}
+
+.dialogue_left>.bubble {
+    background: #139ee0;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 13px;
+    margin-top: 20px;
+    top: 25px;
+    width: fit-content;
+    line-height: 2em;
+}
+
+#run_link {
+    padding: 10px;
+    line-height: 2em;
+    font-family: "Quicksand", cursive;
+    color: yellow;
+}
+
+.dialogue_left>.bubble::before {
+    position: absolute;
+    content: "";
+    border-left: 20px solid transparent;
+    border-right: 20px solid #139ee0;
+    border-bottom: 20px solid transparent;
+    left: 40px;
+    top: 30px;
+}

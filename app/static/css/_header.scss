@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+header {
+    position: fixed;
+    top: 0;
+    height: 10%;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 2px solid;
+    background-image: url("../pics/top_pic.png");
+    background-size: cover;
+    background-position: center;
+    min-width: 300px;
+}
+
+.top_box {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#top_accroche {
+    color: rgb(6, 4, 39);
+    font-family: "Dancing Script", cursive;
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
+    min-width: 300px;
+}

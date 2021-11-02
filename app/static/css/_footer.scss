@@ -1,0 +1,58 @@
+#bottom_pic {
+    position: fixed;
+    content: url("../pics/bottom_pic.png");
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    overflow: hidden;
+    border-top: 2px solid;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.bottom_box {
+    position: fixed;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: transparent;
+    z-index: 2;
+}
+
+
+a {
+    color: blue;
+    vertical-align: middle;
+}
+
+#nom {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    color: darkblue;
+    padding-left: 1%;
+}
+
+#github {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+#trello {
+    padding-right: 1%;
+    font-family: "Quicksand",
+        sans-serif;
+    font-weight: bold;
+}

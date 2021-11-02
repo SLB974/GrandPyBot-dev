@@ -1,0 +1,43 @@
+@media only screen and (max-width:1400px) {
+
+    body {
+        font-size: 16px;
+    }
+
+    #submit,
+    #user_query {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:1000px) {
+
+    #submit,
+    #user_query {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    #submit,
+    #user_query {
+        font-size: 11px;
+    }
+}
+
+@media only screen and (max-width:360px) {
+
+    body {
+        font-size: 10px;
+    }
+
+    #submit,
+    #user_query {
+        font-size: 9px;
+    }
+}

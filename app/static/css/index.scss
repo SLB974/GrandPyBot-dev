@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 300px;
+}
+
+#run_link {
+    content: attr("à la Réunion, dans l'océan indien");
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand&display=swap');
+@import "./media";
+@import "./header";
+@import "./footer";
+@import "./central_zone";
+@import "./chatbox";
+@import "./bubble_left";
+@import "./bubble_right";
+@import "./form";

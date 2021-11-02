@@ -1,0 +1,42 @@
+.dialogue_right {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    align-items: flex-start;
+    align-content: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.dialogue_right>.avatar {
+
+    content: url("../pics/user.png");
+    max-width: 60px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    opacity: 0.5;
+}
+
+.dialogue_right>.bubble {
+    background: #39b409;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 13px;
+    margin-top: 20px;
+    top: 25px;
+    width: fit-content;
+    line-height: 2em;
+}
+
+.dialogue_right>.bubble::after {
+    position: absolute;
+    content: "";
+    border-left: 20px solid #39b409;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    right: 40px;
+    top: 30px;
+
+}

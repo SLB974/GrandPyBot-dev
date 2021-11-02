@@ -1,0 +1,9 @@
+{
+"python.autoComplete.extraPaths":[
+  "/app","/app/*", "/app/core/parser","app/core/parser"
+],
+"python.analysis.extraPaths": [
+  "/app", "/app/*", "/app/core/parser","app/core/parser"
+],
+"liveServer.settings.port": 5501
+}

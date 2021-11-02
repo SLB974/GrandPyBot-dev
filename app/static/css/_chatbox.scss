@@ -1,0 +1,33 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(196, 227, 230);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(152, 206, 219);
+}
+
+#chatbox {
+    position: relative;
+    top: 2%;
+    left: 10%;
+    height: 87%;
+    width: 80%;
+    min-width: 240px;
+    z-index: 2;
+    background-color: transparent;
+    box-shadow: 0 20px 50px rgb(23, 32, 90);
+    border: 3px solid transparent;
+    border-radius: 20px;
+}
+
+#chatbox p {
+    font-family: "QuickSand", cursive;
+}

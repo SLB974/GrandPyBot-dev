@@ -1,0 +1,353 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 300px;
+}
+
+@media only screen and (max-width: 1400px) {
+  body {
+    font-size: 16px;
+  }
+  #submit,
+  #user_query {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #submit,
+  #user_query {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  #submit,
+  #user_query {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  body {
+    font-size: 10px;
+  }
+  #submit,
+  #user_query {
+    font-size: 9px;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  height: 10%;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 2px solid;
+  background-image: url("../pics/top_pic.png");
+  background-size: cover;
+  background-position: center;
+  min-width: 300px;
+}
+
+.top_box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#top_accroche {
+  color: #060427;
+  font-family: "Dancing Script", cursive;
+  font-size: 2em;
+  width: 100%;
+  text-align: center;
+  min-width: 300px;
+}
+
+#bottom_pic {
+  position: fixed;
+  content: url("../pics/bottom_pic.png");
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  overflow: hidden;
+  border-top: 2px solid;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.bottom_box {
+  position: fixed;
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  background-color: transparent;
+  z-index: 2;
+}
+
+a {
+  color: blue;
+  vertical-align: middle;
+}
+
+#nom {
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  color: darkblue;
+  padding-left: 1%;
+}
+
+#github {
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+}
+
+#trello {
+  padding-right: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+}
+
+#central_zone {
+  position: relative;
+  top: 10vh;
+  height: 80vh;
+  width: 100%;
+  overflow: hidden;
+  min-width: 300px;
+}
+
+#central_zone:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.5;
+  background-image: url("../pics/middle_pic.png");
+  background-repeat: none;
+  background-position: 50% 0;
+  background-size: cover;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4e3e6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #98cedb;
+}
+
+#chatbox {
+  position: relative;
+  top: 2%;
+  left: 10%;
+  height: 87%;
+  width: 80%;
+  min-width: 240px;
+  z-index: 2;
+  background-color: transparent;
+  -webkit-box-shadow: 0 20px 50px #17205a;
+          box-shadow: 0 20px 50px #17205a;
+  border: 3px solid transparent;
+  border-radius: 20px;
+}
+
+#chatbox p {
+  font-family: "QuickSand", cursive;
+}
+
+.dialogue_left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 100%;
+}
+
+.dialogue_left > .avatar {
+  content: url("../pics/grandpy.png");
+  max-width: 60px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+}
+
+.dialogue_left > .bubble {
+  background: #139ee0;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 13px;
+  margin-top: 20px;
+  top: 25px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  line-height: 2em;
+}
+
+#run_link {
+  font-family: "Quicksand", cursive;
+  color: aqua;
+  content: attr("href", "www.reunion.fr");
+  content: attr("target", "_blank");
+}
+
+.dialogue_left > .bubble::before {
+  position: absolute;
+  content: "";
+  border-left: 20px solid transparent;
+  border-right: 20px solid #139ee0;
+  border-bottom: 20px solid transparent;
+  left: 40px;
+  top: 30px;
+}
+
+.dialogue_right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  position: relative;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.dialogue_right > .avatar {
+  content: url("../pics/user.png");
+  max-width: 60px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  opacity: 0.5;
+}
+
+.dialogue_right > .bubble {
+  background: #39b409;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 13px;
+  margin-top: 20px;
+  top: 25px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  line-height: 2em;
+}
+
+.dialogue_right > .bubble::after {
+  position: absolute;
+  content: "";
+  border-left: 20px solid #39b409;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  right: 40px;
+  top: 30px;
+}
+
+#user_question {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 4%;
+  left: 10%;
+  height: 7%;
+  width: 80%;
+  min-width: 240px;
+  z-index: 2;
+  background-color: transparent;
+}
+
+#message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+#user_query,
+#submit {
+  font-family: "Quicksand", cursive;
+  border-radius: 20px;
+  border: 2px solid #17205a;
+  padding: 0.5%;
+  opacity: 0.8;
+}
+
+#user_query {
+  width: 80%;
+}
+
+#submit {
+  width: 18%;
+  font-weight: bold;
+}
+/*# sourceMappingURL=index.css.map */

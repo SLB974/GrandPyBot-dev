@@ -1,0 +1,24 @@
+#central_zone {
+    position: relative;
+    top: 10vh;
+    height: 80vh;
+    width: 100%;
+    overflow: hidden;
+    min-width: 300px;
+}
+
+#central_zone:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.5;
+    background-image: url('../pics/middle_pic.png');
+    background-repeat: none;
+    background-position: 50% 0;
+    background-size: cover
+}
