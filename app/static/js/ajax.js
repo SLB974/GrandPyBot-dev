@@ -3,74 +3,107 @@
 const $form = $("#message");
 const $box = $("#chatbox");
 const $question = $("#user_query");
-const $spinner = $("#spinner");
 const $map = $("#map");
+const $spinner = $(".spinner");
+const $origin = $("#chatbox .dialogue_left:first-child");
 
-function createParagraph(paragraphContent, classe) {
-    let paragraph = document.createElement("p");
-    paragraph.innerHTML = paragraphContent;
-    paragraph.className = classe;
-    $box.append(paragraph);
-};
+function createDialogue(dialogue, direction) {
+
+    console.log(direction);
+
+    if (direction == true) {
+        direction = "dialogue_left";
+    } else {
+        direction = "dialogue_right";
+    };
+
+
+    console.log(dialogue, direction);
+    let $target = $origin.clone()
+    $target.removeClass('dialogue_left');
+    $target.addClass(direction);
+    $target.children('.bubble').text(dialogue);
+    $target.appendTo($box);
+    $box.animate({ scrollTop: 1000 }, "slow");
+
+}
 
 function createMap(mapLink) {
-
+    createDialogue('Voici une carte pour te repérer...',true)
     var img = $('<img id="map">');
     img.attr('src', mapLink);
     $box.append(img);
-};
+    $box.animate({ scrollTop: 1000 }, "slow");
 
+};
 
 function createLink(wikiLink) {
-    link = $("<a target='_blank' href=" + wikiLink + ">Plus d'informations sur Wikipedia</a>");
+    link = $("<a target='_blank' id='wikilink' href=" + wikiLink + ">Plus d'informations sur Wikipedia</a>");
     $box.append(link);
+    $box.animate({ scrollTop: 1000 }, "slow");
+
 };
 
-function updateScroll() {
-    $box.scrollTop = $box.scrollHeight;
-};
-
-
-
+function manageEmpty(response) {
+    createDialogue(response["empty"], true);
+}
 function manageResponse(response) {
     if (response.grandpy_none) {
-        createParagraph(response.grandpy_none, "grand_py");
+        createDialogue(response.grandpy_none, true);
     } else {
-        createParagraph(response.grandpy_response, "grand_py");
-        createParagraph(response.address, "grand_py");
+        createDialogue(response.grandpy_response, true);
+        createDialogue(response.address, true);
         createMap(response.map_link);
-        createParagraph(response.grandpy_catch_wiki, "grand_py");
-        createParagraph(response.wiki_response, "grand_py");
-        createLink(response.wiki_link);
-        updateScroll();
-        $spinner.toggleClass("spinner_on spinner_off")
+        if (response.wiki_response) {
+            createDialogue(response.grandpy_catch_wiki, true);
+            createDialogue(response.wiki_response, true);
+            createLink(response.wiki_link);
+            createDialogue(response.grandpy_next_query, true);
+        } else {
+            createDialogue("Je n'ai pas trouvé d'informations supplémentaires sur cet endroit", true)
+        }
     };
 };
 
 
-$(document).ready(() => {
 
-    // $('#mop').attr('src', "https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=AIzaSyDkeF5Xu-WxkLQWfA4TBXdcupRDi6KSeRY");
+$(document).ready(() => {
 
     $form.submit(function (e) {
         e.preventDefault();
-        $box.empty();
+        $spinner.show();
         var user_query = $question.val();
-        createParagraph(user_query, "user");
+        console.log(user_query.length);
         $question.val("");
-        $spinner.toggleClass("spinner_off spinner_on");
-        $.ajax({
-            url: '/ajax',
-            type: 'POST',
-            data: JSON.stringify(user_query),
-            success: function (response) {
+        
+        if (user_query.length == 0) {
+            $.ajax({
+                url: '/empty'
+            }).done(function (response) {
                 console.log(response);
-                manageResponse(response);
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
+                manageEmpty(response);
+            });
+        } else {
+            
+            createDialogue(user_query, false);
+            $box.animate({ scrollTop: 1000 }, "slow");
+            $.ajax({
+                url: '/ajax',
+                type: 'POST',
+                data: JSON.stringify(user_query),
+                success: function (response) {
+                    console.log(response);
+                    manageResponse(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        };
+        
+        $box.animate({ scrollTop: 1000 }, "slow");
+
+        $spinner.hide();
     });
 
 });

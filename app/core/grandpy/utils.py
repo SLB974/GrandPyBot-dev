@@ -23,22 +23,22 @@ grandpy_nickname = [
 ]
 
 grandpy_catch_phrase = [
-    "Tu peux me demander ce que tu veux. quel endroit cherches-tu ?",
+    "Tu peux me demander ce que tu veux. Quel endroit cherches-tu ?",
     "Y-a-t-il un lieu sur lequel tu recherches des informations ?",
     "Dis-moi quel endroit tu aimerais que je trouve...",
     "Qu'est-ce que tu cherches comme endroit ?",
     "Défie-moi ! Quel lieu recherches-tu ?",
-    "J'attends mon petit, dis-moi ce que tu cherches...",
+    "J'attends... dis-moi ce que tu cherches...",
     "Ne fais pas languir GrandPy, quel endroit t'intéresse ?",
-    "Je connais (presque) le monde entier, un lieu en particulier ?",
+    "Je connais (presque) le monde entier, y a-t-il un lieu qui t'intéresse en particulier ?",
 ]
 
 grandpy_response = [
-    "voici les informations que tu cherchais : ",
-    "pour répondre à ta demande, voici ce que j'ai trouvé : ",
-    "tu peux toujours compter sur GranPy : ",
-    "regarde ce que j'ai trouvé : ",
-    "eh bien, je suis incollable non ? ",
+    "Voici les informations que tu cherchais...",
+    "Pour répondre à ta demande, voici ce que j'ai trouvé : ",
+    "Tu peux toujours compter sur GranPy...",
+    "Regarde ce que j'ai trouvé...",
+    "Eh bien, je suis incollable non ? ",
 ]
 
 grandpy_catch_wiki = [

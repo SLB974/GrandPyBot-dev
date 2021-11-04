@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 * {
@@ -7,6 +8,10 @@
 
 body {
   min-width: 300px;
+}
+
+#run_link {
+  content: attr("à la Réunion, dans l'océan indien");
 }
 
 @media only screen and (max-width: 1400px) {
@@ -199,10 +204,11 @@ a {
           box-shadow: 0 20px 50px #17205a;
   border: 3px solid transparent;
   border-radius: 20px;
+  overflow-y: auto;
 }
 
 #chatbox p {
-  font-family: "QuickSand", cursive;
+  font-family: "Quicksand", cursive;
 }
 
 .dialogue_left {
@@ -240,13 +246,6 @@ a {
   line-height: 2em;
 }
 
-#run_link {
-  font-family: "Quicksand", cursive;
-  color: aqua;
-  content: attr("href", "www.reunion.fr");
-  content: attr("target", "_blank");
-}
-
 .dialogue_left > .bubble::before {
   position: absolute;
   content: "";
@@ -255,6 +254,23 @@ a {
   border-bottom: 20px solid transparent;
   left: 40px;
   top: 30px;
+}
+
+#wikilink {
+  font-family: "Quicksand", cursive;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: #139ee0;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  top: 25px;
+  line-height: 2em;
 }
 
 .dialogue_right {
@@ -349,5 +365,115 @@ a {
 #submit {
   width: 18%;
   font-weight: bold;
+}
+
+.spinner {
+  display: block;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  border: 3px solid aqua;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.spinner:before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid aquamarine;
+  border-right: 3px solid aquamarine;
+  border-radius: 50%;
+  -webkit-animation: animate_around 2s linear infinite;
+          animation: animate_around 2s linear infinite;
+}
+
+#spin {
+  display: block;
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  width: 50%;
+  height: 4px;
+  background: transparent;
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-animation: animate 2s linear infinite;
+          animation: animate 2s linear infinite;
+}
+
+#spin::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: aquamarine;
+  top: -6px;
+  right: -8px;
+  -webkit-box-shadow: 0 0 20px aquamarine;
+          box-shadow: 0 0 20px aquamarine;
+}
+
+@-webkit-keyframes animate_around {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes animate_around {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes animate {
+  0% {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+  100% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg);
+  }
+}
+
+@keyframes animate {
+  0% {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+  100% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg);
+  }
+}
+
+#map {
+  display: block;
+  border: 2px solid blue;
+  margin-left: auto;
+  margin-right: auto;
 }
 /*# sourceMappingURL=index.css.map */

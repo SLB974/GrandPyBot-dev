@@ -10,7 +10,7 @@ class GeoCoder:
 
     def __init__(self, query_list):
         self.input = "+".join(query_list)
-        self.__response = {"addresse": None, "lat": None, "lng": None, "map_link": None}
+        self.__response = {"address": None, "lat": None, "lng": None, "map_link": None}
 
     def process(self):
         """Launch methods for fetching data"""
@@ -55,7 +55,7 @@ class GeoCoder:
         self.__response["map_link"] = (
             "https://maps.googleapis.com/maps/api/staticmap?center="
             + self.coordinates()
-            + "&size=400x400"
+            + "&size=300x300"
             + "&zoom=14"
             + "&markers=color:red%7C"
             + self.coordinates()

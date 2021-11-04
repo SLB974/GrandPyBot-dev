@@ -42,7 +42,7 @@ class GlobalFetcher:
 
         self.__response["grandpy_response"] = grandpy.positive_response()
         self.__response["grandpy_catch_wiki"] = grandpy.anecdote()
-        self.__response["address"] = geocoder.get_response["address"]
+        self.__response["address"] = "Voici l'adresse : " + geocoder.get_response["address"]
         self.__response["map_link"] = geocoder.get_response["map_link"]
         self.__response["grandpy_next_query"] = grandpy.next_query()
 

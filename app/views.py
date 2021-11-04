@@ -20,6 +20,13 @@ def intro():
     return response
 
 
+@app.route("/empty", methods=["GET"])
+def empty():
+    grandpy = GrandPy()
+    response = {"empty": grandpy.empty_response()}
+    return response
+
+
 @app.route("/ajax", methods=["POST"])
 def manage_query():
     data = request.get_json(force=True)

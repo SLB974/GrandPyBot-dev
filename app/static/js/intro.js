@@ -3,6 +3,7 @@ function manageIntro(response) {
 }
 
 $(window).on('load', function () {
+    $('#spinner').hide();
     $.ajax({
         url: '/intro'
     }).done(function (response) {

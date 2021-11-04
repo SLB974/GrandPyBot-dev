@@ -26,13 +26,6 @@
     line-height: 2em;
 }
 
-#run_link {
-    padding: 10px;
-    line-height: 2em;
-    font-family: "Quicksand", cursive;
-    color: yellow;
-}
-
 .dialogue_left>.bubble::before {
     position: absolute;
     content: "";
@@ -41,4 +34,19 @@
     border-bottom: 20px solid transparent;
     left: 40px;
     top: 30px;
+}
+
+#wikilink {
+    font-family: "Quicksand", cursive;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    background: #139ee0;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    top: 25px;
+    line-height: 2em;
 }
