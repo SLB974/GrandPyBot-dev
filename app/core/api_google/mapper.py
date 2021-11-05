@@ -1,35 +1,24 @@
 import requests
-import json
 
-GOOGLE_API_KEY = "AIzaSyDkeF5Xu-WxkLQWfA4TBXdcupRDi6KSeRY"
+from app.config.settings import GOOGLE_API_KEY
+
+# GOOGLE_API_KEY = "AIzaSyDkeF5Xu-WxkLQWfA4TBXdcupRDi6KSeRY"
 
 
 class GeoCoder:
     """Query google places api for address and coordinates.
-    and generate google map link"""
+    # and generate google map link"""
 
     def __init__(self, query_list):
         self.input = "+".join(query_list)
-        self.__response = {"address": None, "lat": None, "lng": None, "map_link": None}
-
-    def process(self):
-        """Launch methods for fetching data"""
-
-        self.fetch_coordinates()
-        self.build_map_link()
 
     @property
-    def get_response(self):
-        """Getter method"""
+    def get_data(self):
+        """getter method"""
 
-        return self.__response
+        return self.__fetch_coordinates()
 
-    def coordinates(self):
-        """Generate usable coordinates for map link"""
-
-        return ",".join([str(self.__response["lat"]), str(self.__response["lng"])])
-
-    def fetch_coordinates(self):
+    def __fetch_coordinates(self):
         """Query google api places"""
 
         param = {
@@ -39,26 +28,38 @@ class GeoCoder:
             "key": GOOGLE_API_KEY,
         }
 
+        data = {
+            "address": None,
+            "lat": None,
+            "lng": None,
+            "map_link": None,
+        }
+
         url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
 
         response = requests.get(url, params=param).json()
 
         if response["status"] == "OK":
 
-            self.__response["address"] = response["candidates"][0]["formatted_address"]
-            self.__response["lat"] = response["candidates"][0]["geometry"]["location"]["lat"]
-            self.__response["lng"] = response["candidates"][0]["geometry"]["location"]["lng"]
+            data["address"] = response["candidates"][0]["formatted_address"]
+            data["lat"] = response["candidates"][0]["geometry"]["location"]["lat"]
+            data["lng"] = response["candidates"][0]["geometry"]["location"]["lng"]
 
-    def build_map_link(self):
+            coordinates = ",".join([str(data["lat"]), str(data["lng"])])
+            data["map_link"] = self.__build_map_link(coordinates)
+
+        return data
+
+    def __build_map_link(self, coordinates):
         """generate usable map link"""
 
-        self.__response["map_link"] = (
+        return (
             "https://maps.googleapis.com/maps/api/staticmap?center="
-            + self.coordinates()
+            + coordinates
             + "&size=300x300"
             + "&zoom=14"
             + "&markers=color:red%7C"
-            + self.coordinates()
+            + coordinates
             + "&key="
             + GOOGLE_API_KEY
         )

@@ -1,70 +1,82 @@
 import requests
-import json
 
 
 class WikiLoader:
     """Query Media Wiki api getting informations on location"""
 
     def __init__(self, lat, lng):
-        self.lat = lat
-        self.lng = lng
-        self.__response = {"title": None, "pageid": None, "anecdote": None, "url": None}
-
-    def process(self):
-        self.fetch_wiki()
-        self.fetch_content()
+        self.__lat = lat
+        self.__lng = lng
 
     @property
-    def get_response(self):
-        return self.__response
+    def get_data(self):
+        """getter method"""
 
-    def fetch_wiki(self):
-        """Find title and pageid"""
+        return self.__fetch_wiki(self.__fetch_title())
 
-        param = {
-            "action": "query",
-            "list": "geosearch",
-            "gsradius": 200,
-            "gscoord": f"{self.lat}|{self.lng}",
-            "gslimit": 1,
-            "format": "json",
+    def __fetch_title(self):
+        """Find title and pageid and then find anecdote and url"""
+
+        title = None
+        id = None
+
+        if self.__lat != None and self.__lng != None:
+
+            param = {
+                "action": "query",
+                "list": "geosearch",
+                "gsradius": 200,
+                "gscoord": f"{self.__lat}|{self.__lng}",
+                "gslimit": 1,
+                "format": "json",
+            }
+
+            url = "https://fr.wikipedia.org/w/api.php"
+
+            response = requests.get(url, params=param)
+
+            if response.status_code == 200:
+                response = response.json()
+
+                if response["query"]["geosearch"]:
+                    title = response["query"]["geosearch"][0]["title"]
+                    id = response["query"]["geosearch"][0]["pageid"]
+        return title, id
+
+    def __fetch_wiki(self, references):
+
+        data = {
+            "anecdote": None,
+            "url": None,
         }
 
-        url = "https://fr.wikipedia.org/w/api.php"
+        title, id = references[0], references[1]
 
-        response = requests.get(url, params=param)
+        if title != None and id != None:
 
-        if response.status_code == 200:
-            response = response.json()
+            param = {
+                "action": "query",
+                "prop": "extracts|info",
+                "exchars": 1000,
+                "titles": title,
+                "inprop": "url",
+                "explaintext": "",
+                "format": "json",
+            }
 
-            if response["query"]["geosearch"]:
-                self.__response["title"] = response["query"]["geosearch"][0]["title"]
-                self.__response["pageid"] = response["query"]["geosearch"][0]["pageid"]
+            url = "https://fr.wikipedia.org/w/api.php"
 
-    def fetch_content(self):
-        """find full text anecdote"""
+            response = requests.get(url, params=param)
 
-        param = {
-            "action": "query",
-            "prop": "extracts|info",
-            "exchars": 1200,
-            "titles": self.__response["title"],
-            "inprop": "url",
-            "explaintext": "",
-            "format": "json",
-        }
+            if response.status_code == 200:
+                response = response.json()
 
-        url = "https://fr.wikipedia.org/w/api.php"
+                id = str(id)
 
-        response = requests.get(url, params=param)
+                if id in response["query"]["pages"]:
 
-        if response.status_code == 200:
-            response = response.json()
+                    data["anecdote"] = response["query"]["pages"][id]["extract"]
 
-            id = str(self.__response["pageid"])
+                    data["url"] = response["query"]["pages"][id]["fullurl"]
 
-            if id in response["query"]["pages"]:
-
-                self.__response["anecdote"] = response["query"]["pages"][id]["extract"]
-
-                self.__response["url"] = response["query"]["pages"][id]["fullurl"]
+        return data
