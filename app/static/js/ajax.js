@@ -73,14 +73,12 @@ $(document).ready(() => {
         e.preventDefault();
         $spinner.show();
         var user_query = $question.val();
-        console.log(user_query.length);
         $question.val("");
         
         if (user_query.length == 0) {
             $.ajax({
                 url: '/empty'
             }).done(function (response) {
-                console.log(response);
                 manageEmpty(response);
             });
         } else {
@@ -101,7 +99,7 @@ $(document).ready(() => {
             });
         };
         
-        $box.animate({ scrollTop: 1000 }, "slow");
+        $box.scrollTop = $box.scrollHeight;
 
         $spinner.hide();
     });
