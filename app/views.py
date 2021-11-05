@@ -5,8 +5,6 @@ from app.core.grandpy.grandpy import GrandPy
 
 app = Flask(__name__)
 
-# app.config.from_object("settings")
-
 
 @app.route("/")
 def index():
@@ -31,7 +29,6 @@ def empty():
 def manage_query():
     data = request.get_json(force=True)
     fetcher = GlobalFetcher(data)
-    fetcher.process()
     return fetcher.get_data()
 
 
