@@ -7,13 +7,12 @@ const $map = $("#map");
 const $spinner = $(".spinner");
 const $origin = $("#chatbox .dialogue_left:first-child");
 
-function scrollToLastElement() {
-
-    var $element = $box.children().last();
+function scrollToLast() {
+    var $element = $box.children().last()
     $box.animate({
         scrollTop: $element.offset().top
     }, 'fast');
-}
+};
 
 function createDialogue(dialogue, direction) {
 
@@ -23,14 +22,12 @@ function createDialogue(dialogue, direction) {
         direction = "dialogue_right";
     };
 
-
     let $target = $origin.clone();
     $target.removeClass('dialogue_left');
     $target.addClass(direction);
     $target.children('.bubble').text(dialogue);
     $target.appendTo($box);
-    scrollToLastElement();
-
+    scrollToLast();
 }
 
 function createMap(mapLink) {
@@ -38,13 +35,13 @@ function createMap(mapLink) {
     var img = $('<img class="map">');
     img.attr('src', mapLink);
     $box.append(img);
-    scrollToLastElement();
+    scrollToLast();
 };
 
 function createLink(wikiLink) {
     link = $("<a target='_blank' class='wikilink' href=" + wikiLink + ">Plus d'informations sur Wikipedia</a>");
     $box.append(link);
-    scrollToLastElement();
+    scrollToLast();
 };
 
 function manageEmpty(response) {
@@ -64,7 +61,7 @@ function manageResponse(response) {
             createLink(response.wiki_link);
             createDialogue(response.grandpy_next_query, true);
         } else {
-            createDialogue("Je n'ai pas trouvé d'informations supplémentaires sur cet endroit", true)
+            createDialogue("Je n'ai pas trouvé d'informations supplémentaires sur cet endroit", true);
         }
     };
 };
@@ -89,7 +86,6 @@ $(document).ready(() => {
             
             $box.children().not(':last').remove();
             createDialogue(user_query, false);
-            $box.animate({ scrollTop: 1000 }, "slow");
             $.ajax({
                 url: '/ajax',
                 type: 'POST',
