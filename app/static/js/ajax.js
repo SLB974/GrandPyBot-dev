@@ -7,9 +7,15 @@ const $map = $("#map");
 const $spinner = $(".spinner");
 const $origin = $("#chatbox .dialogue_left:first-child");
 
-function createDialogue(dialogue, direction) {
+function scrollToLastElement() {
 
-    console.log(direction);
+    var $element = $box.children().last();
+    $box.animate({
+        scrollTop: $element.offset().top
+    }, 'fast');
+}
+
+function createDialogue(dialogue, direction) {
 
     if (direction == true) {
         direction = "dialogue_left";
@@ -18,35 +24,33 @@ function createDialogue(dialogue, direction) {
     };
 
 
-    console.log(dialogue, direction);
-    let $target = $origin.clone()
+    let $target = $origin.clone();
     $target.removeClass('dialogue_left');
     $target.addClass(direction);
     $target.children('.bubble').text(dialogue);
     $target.appendTo($box);
-    $box.animate({ scrollTop: 1000 }, "slow");
+    scrollToLastElement();
 
 }
 
 function createMap(mapLink) {
     createDialogue('Voici une carte pour te repérer...',true)
-    var img = $('<img id="map">');
+    var img = $('<img class="map">');
     img.attr('src', mapLink);
     $box.append(img);
-    $box.animate({ scrollTop: 1000 }, "slow");
-
+    scrollToLastElement();
 };
 
 function createLink(wikiLink) {
-    link = $("<a target='_blank' id='wikilink' href=" + wikiLink + ">Plus d'informations sur Wikipedia</a>");
+    link = $("<a target='_blank' class='wikilink' href=" + wikiLink + ">Plus d'informations sur Wikipedia</a>");
     $box.append(link);
-    $box.animate({ scrollTop: 1000 }, "slow");
-
+    scrollToLastElement();
 };
 
 function manageEmpty(response) {
     createDialogue(response["empty"], true);
 }
+
 function manageResponse(response) {
     if (response.grandpy_none) {
         createDialogue(response.grandpy_none, true);
@@ -70,8 +74,8 @@ function manageResponse(response) {
 $(document).ready(() => {
 
     $form.submit(function (e) {
-        e.preventDefault();
         $spinner.show();
+        e.preventDefault();
         var user_query = $question.val();
         $question.val("");
         
@@ -83,6 +87,7 @@ $(document).ready(() => {
             });
         } else {
             
+            $box.children().not(':last').remove();
             createDialogue(user_query, false);
             $box.animate({ scrollTop: 1000 }, "slow");
             $.ajax({
@@ -90,7 +95,6 @@ $(document).ready(() => {
                 type: 'POST',
                 data: JSON.stringify(user_query),
                 success: function (response) {
-                    console.log(response);
                     manageResponse(response);
                 },
                 error: function (error) {
@@ -98,9 +102,6 @@ $(document).ready(() => {
                 }
             });
         };
-        
-        $box.scrollTop = $box.scrollHeight;
-
         $spinner.hide();
     });
 

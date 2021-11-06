@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 * {
@@ -8,10 +7,6 @@
 
 body {
   min-width: 300px;
-}
-
-#run_link {
-  content: attr("à la Réunion, dans l'océan indien");
 }
 
 @media only screen and (max-width: 1400px) {
@@ -256,7 +251,7 @@ a {
   top: 30px;
 }
 
-#wikilink {
+.wikilink {
   font-family: "Quicksand", cursive;
   display: block;
   margin-left: auto;
@@ -470,7 +465,7 @@ a {
   }
 }
 
-#map {
+.map {
   display: block;
   border: 2px solid blue;
   margin-left: auto;
