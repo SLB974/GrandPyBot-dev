@@ -49,6 +49,7 @@ function createLink(wikiLink) {
 
 function manageEmpty(response) {
     createDialogue(response["empty"], true);
+    scrollToLast();
 }
 function manageResponse(response) {
     if (response.grandpy_none) {
