@@ -7,9 +7,14 @@ const $map = $("#map");
 const $spinner = $(".spinner");
 const $origin = $("#chatbox .dialogue_left:first-child");
 
-function createDialogue(dialogue, direction) {
+function scrollToLast() {
+    var $element = $box.children().last()
+    $box.animate({
+        scrollTop: $element.offset().top
+    }, 'fast');
+};
 
-    console.log(direction);
+function createDialogue(dialogue, direction) {
 
     if (direction == true) {
         direction = "dialogue_left";
@@ -17,14 +22,12 @@ function createDialogue(dialogue, direction) {
         direction = "dialogue_right";
     };
 
-
-    console.log(dialogue, direction);
     let $target = $origin.clone()
     $target.removeClass('dialogue_left');
     $target.addClass(direction);
     $target.children('.bubble').text(dialogue);
     $target.appendTo($box);
-    $box.animate({ scrollTop: 1000 }, "slow");
+    scrollToLast();
 
 }
 
@@ -33,14 +36,14 @@ function createMap(mapLink) {
     var img = $('<img id="map">');
     img.attr('src', mapLink);
     $box.append(img);
-    $box.animate({ scrollTop: 1000 }, "slow");
+    scrollToLast();
 
 };
 
 function createLink(wikiLink) {
     link = $("<a target='_blank' id='wikilink' href=" + wikiLink + ">Plus d'informations sur Wikipedia</a>");
     $box.append(link);
-    $box.animate({ scrollTop: 1000 }, "slow");
+    scrollToLast();
 
 };
 
@@ -60,7 +63,7 @@ function manageResponse(response) {
             createLink(response.wiki_link);
             createDialogue(response.grandpy_next_query, true);
         } else {
-            createDialogue("Je n'ai pas trouvé d'informations supplémentaires sur cet endroit", true)
+            createDialogue("Je n'ai pas trouvé d'informations supplémentaires sur cet endroit", true);
         }
     };
 };
@@ -83,8 +86,8 @@ $(document).ready(() => {
             });
         } else {
             
+            $box.children().not(':last').remove();
             createDialogue(user_query, false);
-            $box.animate({ scrollTop: 1000 }, "slow");
             $.ajax({
                 url: '/ajax',
                 type: 'POST',
@@ -99,8 +102,6 @@ $(document).ready(() => {
             });
         };
         
-        $box.scrollTop = $box.scrollHeight;
-
         $spinner.hide();
     });
 
