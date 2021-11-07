@@ -75,7 +75,7 @@ $(document).ready(() => {
 
     $form.submit(function (e) {
         e.preventDefault();
-        $spinner.show();
+        $spinner.toggle();
         var user_query = $question.val();
         $question.val("");
         
@@ -103,7 +103,8 @@ $(document).ready(() => {
             });
         };
         
-        $spinner.hide();
+        $spinner.toggle();
+        $box.reload()
     });
 
 });
