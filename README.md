@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# GrandPyBot
-=======
 # GrandPyBot-dev
 
 GrandPy is a bot that can search informations about any location and return (if founded):
@@ -17,4 +14,3 @@ Please, make sure to onfigure the settings.ini file containing constants :
   
 You can try the online finale version on (https://grandpy974.herokuapp.com/).
 This web application is under MIT license.
->>>>>>> c2999d319087757c7f03c521ca11523e490b9401
