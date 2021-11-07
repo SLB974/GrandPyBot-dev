@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, url_for, request
+from flask import Flask, render_template, request
 
 from app.core.fetcher.fetch import GlobalFetcher
 from app.core.grandpy.grandpy import GrandPy

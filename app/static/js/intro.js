@@ -3,11 +3,11 @@ function manageIntro(response) {
 }
 
 $(window).on('load', function () {
-    $('#spinner').toggle();
     $.ajax({
         url: '/intro'
     }).done(function (response) {
         manageIntro(response);
-        });
+    });
+    $('#spinner').toggle();
 });
     

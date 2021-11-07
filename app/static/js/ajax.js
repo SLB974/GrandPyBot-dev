@@ -73,6 +73,7 @@ function manageResponse(response) {
 
 $(document).ready(() => {
 
+    $("#user_query").focus()
     $form.submit(function (e) {
         e.preventDefault();
         $spinner.toggle();
@@ -84,6 +85,7 @@ $(document).ready(() => {
                 url: '/empty'
             }).done(function (response) {
                 manageEmpty(response);
+                $spinner.toggle();
             });
         } else {
             
@@ -96,6 +98,7 @@ $(document).ready(() => {
                 success: function (response) {
                     console.log(response);
                     manageResponse(response);
+                    $spinner.toggle();
                 },
                 error: function (error) {
                     console.log(error);
@@ -103,8 +106,6 @@ $(document).ready(() => {
             });
         };
         
-        $spinner.toggle();
-        $box.reload()
     });
 
 });
