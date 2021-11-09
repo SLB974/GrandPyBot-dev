@@ -2,12 +2,10 @@ import requests
 
 from app.config.settings import GOOGLE_API_KEY
 
-# GOOGLE_API_KEY = "AIzaSyDkeF5Xu-WxkLQWfA4TBXdcupRDi6KSeRY"
-
 
 class GeoCoder:
     """Query google places api for address and coordinates.
-    # and generate google map link"""
+    and generate google map link"""
 
     def __init__(self, query_list):
         self.input = "+".join(query_list)
@@ -16,10 +14,10 @@ class GeoCoder:
     def get_data(self):
         """getter method"""
 
-        return self.__fetch_coordinates()
+        return self.get_coordinates()
 
-    def __fetch_coordinates(self):
-        """Query google api places"""
+    def google_place_response(self):
+        """Query google api place and return json object"""
 
         param = {
             "input": self.input,
@@ -28,6 +26,18 @@ class GeoCoder:
             "key": GOOGLE_API_KEY,
         }
 
+        url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+
+        response = requests.get(url, params=param)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return None
+
+    def get_coordinates(self):
+        """get data from http response"""
+
         data = {
             "address": None,
             "lat": None,
@@ -35,12 +45,9 @@ class GeoCoder:
             "map_link": None,
         }
 
-        url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+        response = self.google_place_response()
 
-        response = requests.get(url, params=param).json()
-
-        if response["status"] == "OK":
-
+        if response and response["candidates"]:
             data["address"] = response["candidates"][0]["formatted_address"]
             data["lat"] = response["candidates"][0]["geometry"]["location"]["lat"]
             data["lng"] = response["candidates"][0]["geometry"]["location"]["lng"]
