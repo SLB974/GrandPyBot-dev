@@ -1,5 +1,4 @@
 import requests
-import json
 
 
 class WikiLoader:
@@ -13,21 +12,20 @@ class WikiLoader:
     def get_data(self):
         """getter method"""
 
-        return self.get_wiki_anecdote(self.get_title())
+        return self.__get_wiki_anecdote(self.__get_title())
 
-        # return self.__fetch_wiki(self.__fetch_title())
-
-    def wiki_response(self, url, param):
+    def __wiki_response(self, url, param):
         """Query wikipedia api and return json"""
 
         response = requests.get(url, param)
 
         if response.status_code == 200:
+
             return response.json()
 
         return None
 
-    def get_title(self):
+    def __get_title(self):
         """Fetch page title and page id"""
 
         title = None
@@ -46,10 +44,7 @@ class WikiLoader:
 
             url = "https://fr.wikipedia.org/w/api.php"
 
-            response = self.wiki_response(url, param)
-
-            with open("json2.json", "w") as f:
-                json.dump(response, f)
+            response = self.__wiki_response(url, param)
 
             if response and response["query"]["geosearch"]:
                 title = response["query"]["geosearch"][0]["title"]
@@ -57,7 +52,7 @@ class WikiLoader:
 
         return title, pageid
 
-    def get_wiki_anecdote(self, references):
+    def __get_wiki_anecdote(self, references):
         """Fetch anecdote and url"""
 
         data = {"anecdote": None, "url": None}
@@ -80,9 +75,7 @@ class WikiLoader:
 
             id = str(id)
 
-            response = self.wiki_response(url, param)
-            with open("json3.json", "w") as f:
-                json.dump(response, f)
+            response = self.__wiki_response(url, param)
 
             if response and response["query"]["pages"]:
                 data["anecdote"] = response["query"]["pages"][id]["extract"]

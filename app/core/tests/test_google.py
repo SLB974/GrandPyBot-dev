@@ -1,4 +1,4 @@
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 from unittest import TestCase
 
 from app.core.api_google.mapper import GeoCoder
@@ -6,7 +6,7 @@ from app.config.settings import GOOGLE_API_KEY
 
 
 def mocked_google_place_response_tour_eiffel():
-    """method that returns google_place_response with tour eiffel"""
+    """returns google_place_response with tour eiffel"""
 
     return {
         "candidates": [
@@ -35,8 +35,8 @@ class GeoCoderTestCase(TestCase):
 
     geocoder = GeoCoder(["tour", "eiffel"])
 
-    def test_get_data_proper_response(self):
-        with patch("app.core.api_google.mapper.GeoCoder.google_place_response") as mocked_method:
+    def test_get_data_proper_response_tour_eiffel(self):
+        with patch("app.core.api_google.mapper.GeoCoder._GeoCoder__google_place_response") as mocked_method:
             mocked_method.return_value = mocked_google_place_response_tour_eiffel()
             expected = {
                 "address": "Champ de Mars, 5 Av. Anatole France, 75007 Paris, France",
@@ -49,7 +49,7 @@ class GeoCoderTestCase(TestCase):
             self.assertEqual(self.geocoder.get_data, expected)
 
     def test_get_data_response_none(self):
-        with patch("app.core.api_google.mapper.GeoCoder.google_place_response") as mocked_method:
+        with patch("app.core.api_google.mapper.GeoCoder._GeoCoder__google_place_response") as mocked_method:
             mocked_method.return_value = mocked_google_place_response_none()
             expected = {"address": None, "lat": None, "lng": None, "map_link": None}
 

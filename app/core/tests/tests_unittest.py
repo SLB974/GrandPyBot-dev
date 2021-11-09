@@ -15,4 +15,4 @@ suite.addTests(loader.loadTestsFromModule(wiki))
 suite.addTests(loader.loadTestsFromModule(fetcher))
 
 runner = unittest.TextTestRunner(verbosity=3)
-resulte = runner.run(suite)
+result = runner.run(suite)

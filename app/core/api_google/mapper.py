@@ -14,9 +14,9 @@ class GeoCoder:
     def get_data(self):
         """getter method"""
 
-        return self.get_coordinates()
+        return self.__get_coordinates()
 
-    def google_place_response(self):
+    def __google_place_response(self):
         """Query google api place and return json object"""
 
         param = {
@@ -35,7 +35,7 @@ class GeoCoder:
 
         return None
 
-    def get_coordinates(self):
+    def __get_coordinates(self):
         """get data from http response"""
 
         data = {
@@ -45,7 +45,7 @@ class GeoCoder:
             "map_link": None,
         }
 
-        response = self.google_place_response()
+        response = self.__google_place_response()
 
         if response and response["candidates"]:
             data["address"] = response["candidates"][0]["formatted_address"]

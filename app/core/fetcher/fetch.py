@@ -15,9 +15,7 @@ class GlobalFetcher:
     def get_data(self):
         """Getter method"""
 
-        geocoder_data = self.__get_geocoder_data()
-        wikiloader_data = self.__get_wikiloader_data()
-        return {**geocoder_data, **wikiloader_data}
+        return {**self.__get_geocoder_data(), **self.__get_wikiloader_data()}
 
     def __get_geocoder_data(self):
         """get data from GeoCoder if usable query"""

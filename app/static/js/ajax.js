@@ -79,6 +79,7 @@ $(document).ready(() => {
         $spinner.toggle();
         var user_query = $question.val();
         $question.val("");
+
         
         if (user_query.length == 0) {
             $.ajax({
