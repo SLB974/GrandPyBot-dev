@@ -12,13 +12,25 @@ class WikiLoader:
     def get_data(self):
         """getter method"""
 
-        return self.__fetch_wiki(self.__fetch_title())
+        return self.get_wiki_anecdote(self.get_title())
 
-    def __fetch_title(self):
-        """Find title and pageid and then find anecdote and url"""
+        # return self.__fetch_wiki(self.__fetch_title())
+
+    def wiki_response(self, url, param):
+        """Query wikipedia api and return json"""
+
+        response = requests.get(url, param)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return None
+
+    def get_title(self):
+        """Fetch page title and page id"""
 
         title = None
-        id = None
+        pageid = None
 
         if self.__lat != None and self.__lng != None:
 
@@ -33,22 +45,18 @@ class WikiLoader:
 
             url = "https://fr.wikipedia.org/w/api.php"
 
-            response = requests.get(url, params=param)
+            response = self.wiki_response(url, param)
 
-            if response.status_code == 200:
-                response = response.json()
+            if response and response["query"]["geosearch"]:
+                title = response["query"]["geosearch"][0]["title"]
+                pageid = response["query"]["geosearch"][0]["pageid"]
 
-                if response["query"]["geosearch"]:
-                    title = response["query"]["geosearch"][0]["title"]
-                    id = response["query"]["geosearch"][0]["pageid"]
-        return title, id
+        return title, pageid
 
-    def __fetch_wiki(self, references):
+    def get_wiki_anecdote(self, references):
+        """Fetch anecdote and url"""
 
-        data = {
-            "anecdote": None,
-            "url": None,
-        }
+        data = {"anecdote": None, "url": None}
 
         title, id = references[0], references[1]
 
@@ -66,17 +74,12 @@ class WikiLoader:
 
             url = "https://fr.wikipedia.org/w/api.php"
 
-            response = requests.get(url, params=param)
+            id = str(id)
 
-            if response.status_code == 200:
-                response = response.json()
+            response = self.wiki_response(url, param)
 
-                id = str(id)
-
-                if id in response["query"]["pages"]:
-
-                    data["anecdote"] = response["query"]["pages"][id]["extract"]
-
-                    data["url"] = response["query"]["pages"][id]["fullurl"]
+            if response and response["query"]["pages"]:
+                data["anecdote"] = response["query"]["pages"][id]["extract"]
+                data["url"] = response["query"]["pages"][id]["fullurl"]
 
         return data
