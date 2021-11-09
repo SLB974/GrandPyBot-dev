@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 class WikiLoader:
@@ -37,7 +38,7 @@ class WikiLoader:
             param = {
                 "action": "query",
                 "list": "geosearch",
-                "gsradius": 200,
+                "gsradius": 1500,
                 "gscoord": f"{self.__lat}|{self.__lng}",
                 "gslimit": 1,
                 "format": "json",
@@ -46,6 +47,9 @@ class WikiLoader:
             url = "https://fr.wikipedia.org/w/api.php"
 
             response = self.wiki_response(url, param)
+
+            with open("json2.json", "w") as f:
+                json.dump(response, f)
 
             if response and response["query"]["geosearch"]:
                 title = response["query"]["geosearch"][0]["title"]
@@ -77,6 +81,8 @@ class WikiLoader:
             id = str(id)
 
             response = self.wiki_response(url, param)
+            with open("json3.json", "w") as f:
+                json.dump(response, f)
 
             if response and response["query"]["pages"]:
                 data["anecdote"] = response["query"]["pages"][id]["extract"]
